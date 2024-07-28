@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-body">Giỏ hàng
+            <a th:href="@{/cart/view}">{{cart.count}} items x ${{cart.amount | number: 2}}</a>
+        </div>
+    </div>
+</body>
+
+</html>

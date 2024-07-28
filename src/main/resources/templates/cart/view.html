@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div class="card">
+        <div class="card-header">SHOPPING CART</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in cart.items">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.price | number : 2}}</td>
+                        <td>
+                            <input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" type="number" min="1">
+                        </td>
+                        <td>${{item.qty * item.price | number : 2}}</td>
+                        <td>
+                            <button ng-click="cart.remove(item.id)" class="btn btn-danger">
+                                delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <button ng-click="cart.clear()" class="btn btn-danger">Clear</button>
+            <a th:href="@{/order/checkout}" class="btn btn-primary">
+                Checkout
+            </a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

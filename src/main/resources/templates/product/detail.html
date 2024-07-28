@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <main>
+        CHI TIẾT
+        <h1 th:text="${item.name}"></h1>
+        <h1 th:text="${item.category.name}"></h1>
+        CÙNG LOẠI
+        <ul>
+            <li th:each="p: ${item.category.products}">
+                <a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
