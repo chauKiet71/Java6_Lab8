@@ -14,26 +14,31 @@
     <div class="container-fluid">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/product/list}">Home</a>
             </li>
-            <li class="nav-item">
-                <a th:href="@{/security/login}">Sign in</a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/security/logoff}" >Sign out</a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/order/list}">You orders</a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/admin/home/index}">Administration</a>
-            </li>
+
+            <th:block th:if="${remoteUser} != null">
+                <li class="nav-item">
+                    <a th:href="@{/security/logoff}" >Sign out</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/order/list}">You orders</a>
+                </li>
+                <li class="nav-item" th:if="${isDire}">
+                    <a th:href="@{/admin/home/index}">Administration</a>
+                </li>
+            </th:block>
+
+            <th:block th:unless="${remoteUser}">
+                <li class="nav-item">
+                    <a th:href="@{/security/login/form}">Sign in</a>
+                </li>
+            </th:block>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Welcome you</a></li>
+        <ul th:if="${remoteUser}" class="nav navbar-nav navbar-right">
+            <li><a href="#">Welcome [[${remoteUser}]]</a></li>
         </ul>
     </div>
 </nav>
 </body>
-
 </html>

@@ -2,6 +2,7 @@ package com.example.lab8.controller;
 
 import com.example.lab8.entity.Product;
 import com.example.lab8.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import java.util.Optional;
 
 @Controller
 public class ProductController {
+    @Autowired
+    HttpServletRequest req;
 
     @Autowired
     ProductService productService;
@@ -23,9 +26,11 @@ public class ProductController {
         if (cid.isPresent()) {
             List<Product> list = productService.findByCategoryId(cid.get());
             model.addAttribute("items", list);
+            System.out.println(req.getRemoteUser());
         }else {
             List<Product> list = productService.findAll();
             model.addAttribute("items", list);
+            System.out.println(req.getRemoteUser());
         }
         return "product/list";
     }
